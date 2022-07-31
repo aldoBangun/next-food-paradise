@@ -1,14 +1,17 @@
+$body-bg: #EEF0F3;
 $primary: #EFC81A;
 $lightgray: #B6B6B6;
 $gray: #AAAAAA;
 $darkgray: #666666;
 $lightblue: #6E80B0;
+$verylightblue: #6d61f2;
 
 $custom-colors: (
   "lightgray": $lightgray,
   "gray": $gray,
   "darkgray": $darkgray,
-  "lightblue": $lightblue
+  "lightblue": $lightblue,
+  "verylightblue": $verylightblue
 );
   
 $theme-colors: (
