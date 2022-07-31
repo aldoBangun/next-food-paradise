@@ -1,0 +1,7 @@
+.navbar {
+  width: var(--size-window);
+  position: fixed;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
