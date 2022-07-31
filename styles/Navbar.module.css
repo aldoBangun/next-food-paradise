@@ -1,7 +1,22 @@
 .navbar {
-  width: var(--size-window);
+  max-width: var(--size-window);
+  height: 4rem;
   position: fixed;
   bottom: 0;
   margin-left: auto;
   margin-right: auto;
+  background-color: #fff;
+}
+
+.navItem {
+  cursor: pointer;
+  transition: 250ms;
+}
+
+.navItem:hover {
+  color: var(--bs-primary);
+}
+
+.navItem label {
+  transition: 250ms;
 }
