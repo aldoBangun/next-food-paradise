@@ -1,11 +1,26 @@
 :root {
   --size-window: 28rem;
+  --h-navbar: 4rem;
+  --clr-transparent-dark:  rgba(0,0,0,0.05);
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 #__next {
-  background-color: lightgray;
+  background-color: #f5f5f5;
   position: relative;
   max-width: var(--size-window);
   margin-left: auto;
   margin-right: auto;
+}
+
+
+/* Utils */
+.cursor-pointer {
+  cursor: pointer;
 }
