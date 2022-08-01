@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: var(--h-navbar);
+}
+
+.btnBack {
+  --size-btn: 2rem;
+  padding: .5rem;
+  cursor: pointer;
+  height: var(--size-btn);
+  width: var(--size-btn);
+  border-radius: 50%;
+}
+
+.btnBack:hover {
+  background-color: var(--clr-transparent-dark);
+}

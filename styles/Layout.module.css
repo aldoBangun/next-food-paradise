@@ -1,0 +1,4 @@
+.layout {
+  min-height: calc(100vh - var(--h-navbar));
+  padding-bottom: calc(2rem + var(--h-navbar));
+}

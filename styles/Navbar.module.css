@@ -1,6 +1,6 @@
 .navbar {
   max-width: var(--size-window);
-  height: 4rem;
+  height: var(--h-navbar);
   position: fixed;
   bottom: 0;
   margin-left: auto;
