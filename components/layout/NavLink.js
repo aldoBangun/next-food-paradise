@@ -10,11 +10,11 @@ const NavLink = ({ link, label, children }) => {
 
   return (
     <Nav.Item className={style.navItem}>
-      <Link href={link}>
-        <div className={`${isActive ? 'text-primary bg-verylightblue bg-opacity-10' : ''} d-flex align-items-center gap-2 p-2 rounded-2`}>
+      <Link href={link} passHref>
+        <a className={`${isActive ? 'text-primary bg-verylightblue bg-opacity-10' : ''} d-flex align-items-center gap-2 p-2 rounded-2 text-decoration-none`}>
           {children}
           {isActive && (<span>{label}</span>)}
-        </div>
+        </a>
       </Link>
     </Nav.Item>
   )
