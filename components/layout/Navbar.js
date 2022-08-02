@@ -1,12 +1,9 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { Container, Nav } from 'react-bootstrap'
 import { House, PlusSquare, Chat, Person } from 'react-bootstrap-icons'
 import styles from '../../styles/Navbar.module.css'
 import NavLink from './NavLink'
 
 const Navbar = () => {
-
 
   return (
     <>
