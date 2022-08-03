@@ -11,7 +11,7 @@ const Header = ({ header }) => {
 
   return (
     <>
-      <header className={`${style.header} mb-3`}>
+      <header className={`${style.header} pb-3`}>
         <Container className="d-flex align-items-center">
           <Row className="flex-fill no-wrap">
             <Col xs={2}>
