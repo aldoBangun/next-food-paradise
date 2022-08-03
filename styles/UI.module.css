@@ -1,0 +1,15 @@
+.buttonAction {
+  --size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--size);
+  width: var(--size);
+  border-radius: 1rem;
+}
+
+.buttonAction:focus,
+.buttonAction:active {
+  box-shadow: none;
+  border: none;
+}
