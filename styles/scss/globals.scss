@@ -1,5 +1,6 @@
 $body-bg: #EEF0F3;
 $primary: #EFC81A;
+$verylightgray: #E7E7E7;
 $lightgray: #B6B6B6;
 $gray: #AAAAAA;
 $darkgray: #666666;
@@ -7,6 +8,7 @@ $lightblue: #6E80B0;
 $verylightblue: #6d61f2;
 
 $custom-colors: (
+  "verylightgray": $verylightgray,
   "lightgray": $lightgray,
   "gray": $gray,
   "darkgray": $darkgray,
