@@ -20,3 +20,52 @@
 .navItem label {
   transition: 250ms;
 }
+
+.link {
+  --transition: 250ms;
+  position: relative;
+  display: flex;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  z-index: 2;
+  padding: .65rem .75rem;
+  border-radius: .75rem;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: translateY(100%);
+}
+
+.link > * {
+  transition: var(--transition);
+}
+
+.link.isActive {
+  overflow: hidden;
+  color: var(--bs-white);
+}
+
+.link.isActive * {
+  animation: var(--transition) animateLink;
+}
+
+.link.isActive::after {
+  background-color: var(--bs-primary);
+  transform: translateY(0);
+  transition: var(--transition);
+}
+
+@keyframes animateLink {
+  from {
+    transform: translateY(-1rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
