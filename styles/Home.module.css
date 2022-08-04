@@ -10,15 +10,15 @@
 
 .slider {
   --overlay: rgba(0,0,0,0.25);
-  --gluter: calc(1.75rem * 0.5);
+  --gutter: calc(2.5rem * 0.5);
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
   gap: 1rem;
   padding-bottom: 1.5rem;
-  padding-left: var(--gluter);
-  padding-right: var(--gluter);
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
   scroll-snap-type: x mandatory;
 }
 
