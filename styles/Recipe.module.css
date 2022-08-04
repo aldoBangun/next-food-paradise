@@ -1,0 +1,61 @@
+.detailHero {
+  --gutter-y: 2rem;
+  position: relative;
+  height: calc(var(--size-window) - 4rem);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: calc(var(--gutter-y) + 1rem);
+  padding-top: var(--gutter-y);
+}
+
+.detailHero::after {
+  --overlay: rgba(0,0,0,0.5);
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to bottom, var(--overlay), transparent, var(--overlay));
+  background-image: radial-gradient(circle at center, transparent, var(--overlay));
+}
+
+.detailHero > * {
+  position: relative;
+  z-index: 2;
+  min-height: 100%;
+}
+
+.detailHero .buttonBack {
+  position: sticky;
+  flex: 1;
+  top: var(--gutter-y);
+}
+
+.detailHero .heroTitle {
+  color: var(--bs-white);
+  font-size: 2.5rem;
+}
+
+.detailTabs {
+  position: relative;
+  box-sizing: border-box;
+  min-height: calc(100vh - var(--size-window) + 4rem + 1rem);
+  padding-bottom: 2rem;
+  background-color: var(--bs-white);
+  margin-top: -1rem;
+  border-radius: 1rem;
+  z-index: 3;
+}
+
+.commentTextarea {
+  height: 100px !important;
+  resize: none;
+}
+
+.commentName {
+  font-size: .75rem;
+  margin-bottom: 0;
+}
+
+.commentMessage {
+  font-size: .8rem;
+  margin-bottom: 0;
+}

@@ -23,3 +23,5 @@ $theme-colors: (
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "./custom-tabs";
+@import "./custom-container";

@@ -1,0 +1,40 @@
+.nav-tabs {
+  --bs-nav-tabs-border-width: 0;
+}
+
+.nav-tabs {
+
+  .nav-link {
+    position: relative;
+    padding: .5rem 0;
+    font-weight: 500;
+    color: $darkgray;
+
+    &.active {
+      color: $black;
+      background-color: transparent;
+    }
+
+    &.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: .2rem;
+      width: 2rem;
+      border-radius: 9rem;
+      background-color: $primary;
+      animation: animate 250ms;
+    }
+  }
+}
+
+@keyframes animate {
+  from {
+    transform: scaleX(0) translateX(-50%);
+  }
+  to {
+    transform: scaleX(1) translateX(-50%);
+  }
+}
