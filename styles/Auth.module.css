@@ -1,0 +1,20 @@
+.authLayout {
+  box-sizing: border-box;
+  --gutter-y: 2rem;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: var(--gutter-y);
+  padding-bottom: var(--gutter-y);
+}
+
+.authAvatar {
+  --size-avatar: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--size-avatar);
+  width: var(--size-avatar);
+  border-radius: 99rem;
+  background-color: var(--bs-lightgray);
+}
