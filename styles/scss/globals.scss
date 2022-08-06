@@ -1,5 +1,6 @@
 $body-bg: #EEF0F3;
 $primary: #EFC81A;
+$danger: #EF472E;
 $verylightgray: #E7E7E7;
 $lightgray: #B6B6B6;
 $gray: #AAAAAA;
@@ -18,6 +19,7 @@ $custom-colors: (
   
 $theme-colors: (
   "primary": $primary,
+  "danger": $danger
 );
   
 $theme-colors: map-merge($theme-colors, $custom-colors);
