@@ -3,8 +3,13 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { Form, Button } from 'react-bootstrap'
 import Link from 'next/link'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from 'features/thunks/auth'
 
 const LoginForm = () => {
+  const authState = useSelector(state => state.auth)
+  const { loading } = authState
+  const dispatch = useDispatch()
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid email')
@@ -22,7 +27,7 @@ const LoginForm = () => {
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
-      console.log(values)
+      dispatch(login(values))
     },
   })
 
@@ -69,8 +74,8 @@ const LoginForm = () => {
         </Form.Group>
 
         <div className="d-grid">
-          <Button type="submit" className="text-white">
-            Login
+          <Button type="submit" className="text-white" disabled={loading}>
+            {loading ? 'Loading...' : 'Login'}
           </Button>
         </div>
       </Form>

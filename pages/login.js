@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import LoginForm from '@/components/auth/LoginForm'
 import style from '@/styles/Auth.module.css'
 import { Person } from 'react-bootstrap-icons'
 import { Container } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 
 const Login = () => {
+  const authSelector = useSelector(state => state.auth)
+  const { token, error: authError} = authSelector
+  const router = useRouter()
+  
+  useEffect(() => {
+    if(token) {
+      router.replace('/')
+    }
+  }, [router, token, authSelector])
 
   return (
     <div className={style.authLayout}>
@@ -18,10 +29,15 @@ const Login = () => {
             <p className="text-lightgray">Log in to your exiting account.</p>
           </div>
         </div>
+        {authError && <p className="mb-0 text-danger">{authError}</p>}
         <LoginForm />
       </Container>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  return { props: {} }
 }
 
 export default Login
