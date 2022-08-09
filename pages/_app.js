@@ -7,14 +7,15 @@ import axios from 'axios'
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL
 
-
 axios.interceptors.request.use((config) => {
   if(typeof window !== 'undefined') {
     const storage = localStorage.getItem('persist:root')
   
     if(storage) {
       const storageJSON = JSON.parse(storage)
-      const token = storageJSON?.auth
+      const auth = storageJSON?.auth
+      const authJSON = JSON.parse(auth)
+      const token = authJSON?.token
 
       if(config?.category !== "noAuth" && token) {
         config.headers = {

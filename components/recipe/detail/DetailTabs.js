@@ -5,9 +5,7 @@ import TabVideos from './TabVideos'
 import CommentForm from '../comments/CommentForm'
 import CommentList from '../comments/CommentList'
 
-const DetailTabs = () => {
-  const recipeId = 1
-  const ingredients = ["ingredients 1", "ingredients 2", "ingredients 3"]
+const DetailTabs = ({ ingredients, recipe_id: recipeId }) => {
   const videos = [
     {
       videoId: 1,

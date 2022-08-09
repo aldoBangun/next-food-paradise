@@ -1,40 +1,31 @@
+import { useEffect } from 'react'
 import DetailHero from '@/components/recipe/detail/DetailHero'
 import DetailTabs from '@/components/recipe/detail/DetailTabs'
 import { useRouter } from 'next/router'
+import { useSelector, useDispatch } from 'react-redux'
+import { getRecipeDetail } from 'features/thunks/recipeDetail'
 
 const RecipeDetails = () => {
   const router = useRouter()
   const { recipeId } = router.query
-  const recipe = {
-    recipeId,
-    title: 'Pizza Zaro',
-    photo: 'https://picsum.photos/id/19/400',
-    userId: 1,
-    ingredients: ["step 1", "step 2", "step 3"],
-    videos: [
-      {
-        videoId: 1,
-        videoId: 2,
-        videoId: 3
-      }
-    ],
-    comments: [
-      {
-        commentId: 99,
-      },
-      {
-        commentId: 120,
-      },
-      {
-        commentId: 20,
-      },
-    ],
-  }
+  const recipeDetail = useSelector((state) => state.recipeDetail)
+  const { recipe } = recipeDetail
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (recipeId) {
+      dispatch(getRecipeDetail(recipeId))
+    }
+  }, [dispatch, recipeId])
 
   return (
     <>
-      <DetailHero image={recipe.photo} />
-      <DetailTabs />
+      {recipe && (
+        <>
+          <DetailHero recipe={recipe} />
+          <DetailTabs {...recipe} />
+        </>
+      )}
     </>
   )
 }

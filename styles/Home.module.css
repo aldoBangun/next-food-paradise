@@ -32,6 +32,7 @@
   height: 12rem;
   flex-shrink: 0;
   scroll-snap-align: center;
+  background-size: cover;
 }
 
 .sliderItem::after {
