@@ -25,7 +25,7 @@ const RecipePopularItem = (props) => {
                 <div className="d-flex align-items-center gap-2">
                   <StarFill color="#FFB200" />
                   <span className="lh-1 text-black">{rating}</span>
-                  <span className="lh-1 text-gray">{category}</span>
+                  <span className="lh-1 text-gray text-capitalize">{category}</span>
                 </div>
               </div>
             </div>
