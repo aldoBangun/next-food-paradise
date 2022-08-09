@@ -1,31 +1,18 @@
+import { useEffect } from 'react'
 import Link from 'next/link'
 import style from '@/styles/Home.module.css'
 import RecipePopularItem from './RecipePopularItem'
+import { useDispatch, useSelector } from 'react-redux'
+import { getPopularRecipe } from 'features/thunks/popularRecipe'
 
 const RecipePopularList = () => {
-  const recipes = [
-    {
-      recipeId: 1,
-      photo: 'https://picsum.photos/id/99/200',
-      title: 'Was Soup Ges',
-      category: 'Soup',
-      rating: 4.8,
-    },
-    {
-      recipeId: 2,
-      photo: 'https://picsum.photos/id/109/200',
-      title: 'Garry The Lobster',
-      category: 'Seafood',
-      rating: 4.7,
-    },
-    {
-      recipeId: 3,
-      photo: 'https://picsum.photos/id/102/200',
-      title: 'Kupangs Fried Chicken',
-      category: 'Chicken',
-      rating: 4.7,
-    },
-  ]
+  const popularRecipe = useSelector(state => state.popularRecipe)
+  const recipes = popularRecipe?.recipes
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getPopularRecipe())
+  }, [dispatch])
 
   return (
     <>
@@ -38,8 +25,8 @@ const RecipePopularList = () => {
         </Link>
       </div>
       <ul className="d-flex flex-column gap-3">
-        {recipes.map((recipe) => (
-          <RecipePopularItem key={recipe.recipeId} {...recipe} />
+        {recipes && recipes.map((recipe) => (
+          <RecipePopularItem key={recipe.recipe_id} {...recipe} />
         ))}
       </ul>
     </>
