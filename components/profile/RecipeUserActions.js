@@ -8,12 +8,10 @@ const RecipeUserActions = ({ show }) => {
 
   const handleSave = () => {
     setSaved(!saved)
-    console.log(saved)
   }
 
   const handleLike = () => {
     setLiked(!liked)
-    console.log(liked)
   }
 
   return (
