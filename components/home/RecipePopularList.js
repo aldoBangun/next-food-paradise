@@ -12,7 +12,7 @@ const RecipePopularList = () => {
 
   useEffect(() => {
     dispatch(getPopularRecipe())
-  })
+  }, [dispatch])
 
   return (
     <>
