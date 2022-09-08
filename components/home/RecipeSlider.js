@@ -12,7 +12,7 @@ const RecipeSlider = () => {
 
   useEffect(() => {
     dispatch(getPopularRecipe())
-  })
+  }, [dispatch])
 
   return (
     <>

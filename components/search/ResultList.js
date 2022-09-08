@@ -1,21 +1,39 @@
 import RecipePopularItem from '@/components/home/RecipePopularItem'
-import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
 
-const ResultList = ({ result = [] }) => {
-  const router = useRouter()
-  const keyword = router?.query?.keyword
+const ResultList = () => {
+  const searchState = useSelector(state => state.search)
+  const { recipes, newestRecipes, loading, error } = searchState
 
   return (
     <>
-      {result.length ? (
-        <ul>
-          {result.map((item) => (
-            <RecipePopularItem key={item.recipe_id} {...item} />
-          ))}
-        </ul>
-      ) : (
-        <h4 className="text-gray"> {keyword ? <>&quot;{keyword}&quot;</> : 'Result'} not found</h4>
-      )}
+      <div className="mb-4">
+        <h6>Search Result</h6>
+        {loading && <p className="text-muted">Loading...</p>}
+        {recipes?.length ? (
+          <ul className="d-flex flex-column gap-2">
+            {recipes.map((item) => (
+              <RecipePopularItem key={item.recipe_id} {...item} />
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray"> No results. </p>
+        )}
+      </div>
+
+      <div>
+        <h6>Newest Recipe</h6>
+        {loading && <p className="text-muted">Loading...</p>}
+        {newestRecipes?.length ? (
+          <ul className="d-flex flex-column gap-2">
+            {newestRecipes.map((item) => (
+              <RecipePopularItem key={item.recipe_id} {...item} />
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray"> No results. </p>
+        )}
+      </div>
     </>
   )
 }
