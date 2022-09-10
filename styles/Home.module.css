@@ -68,6 +68,7 @@
 .popularItem {
   position: relative;
   transition: 250ms;
+  list-style: none;
 }
 
 .popularItem:hover {

@@ -17,7 +17,9 @@ const ResultList = () => {
             ))}
           </ul>
         ) : (
-          <p className="text-gray"> No results. </p>
+          <>
+            {!loading && <p className="text-gray"> No results. </p>}
+          </>
         )}
       </div>
 
@@ -31,7 +33,9 @@ const ResultList = () => {
             ))}
           </ul>
         ) : (
-          <p className="text-gray"> No results. </p>
+          <>
+            {!loading && <p className="text-gray"> No results. </p>}
+          </>
         )}
       </div>
     </>

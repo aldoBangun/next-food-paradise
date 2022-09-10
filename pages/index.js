@@ -4,6 +4,7 @@ import RecipeSlider from '@/components/home/RecipeSlider'
 import SearchBar from '@/components/UI/SearchBar'
 import RecipeCategoryList from '@/components/home/RecipeCategoryList'
 import RecipePopularList from '@/components/home/RecipePopularList'
+import RecipesAll from '@/components/home/RecipesAll'
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <RecipeSlider />
       <Container>
         <RecipePopularList />
+        <RecipesAll />
       </Container>
     </>
   )
