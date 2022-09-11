@@ -3,6 +3,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllRecipes, recipesSelector } from 'features/slices/recipes'
 import RecipePopularItem from './RecipePopularItem'
+import Loader from '../UI/Loader'
 
 
 const RecipesAll = () => {
@@ -31,7 +32,7 @@ const RecipesAll = () => {
           dataLength={currentPage * limit}
           next={fetchRecipes}
           hasMore={hasMore}
-          loader={<p className="text-muted text-center">Loading...</p>}
+          loader={<Loader />}
           endMessage={<p className="text-muted text-center">No more recipes.</p>}
         >
           {recipes?.length && recipes.map(recipe => (
