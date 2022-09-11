@@ -6,21 +6,21 @@ import RecipePopularItem from './RecipePopularItem'
 
 
 const RecipesAll = () => {
-  const loadLength = 2
-  const [limit, setLimit] = useState(loadLength)
+  const limit = 2
+  const [page, setPage] = useState(1)
   const dispatch = useDispatch()
   const recipes = useSelector(recipesSelector.selectAll)
   const recipesState = useSelector(state => state.recipes)
-  const { dataLength, totalRecipes, loading, error } = recipesState
-  const hasMore = dataLength < totalRecipes
+  const { currentPage, totalPages, loading, error } = recipesState
+  const hasMore = currentPage < totalPages
 
   const fetchRecipes = async () => {
-    setLimit(prev => prev + loadLength)
+    setPage(prev => prev + 1)
   }
 
   useEffect(() => {
-    dispatch(getAllRecipes(limit))
-  }, [limit, dispatch])
+    dispatch(getAllRecipes({ page, limit }))
+  }, [page, dispatch])
 
   return (
     <>
@@ -28,7 +28,7 @@ const RecipesAll = () => {
       {recipes?.length ? (
         <InfiniteScroll
           className="d-flex flex-column gap-3"
-          dataLength={dataLength}
+          dataLength={currentPage * limit}
           next={fetchRecipes}
           hasMore={hasMore}
           loader={<p className="text-muted text-center">Loading...</p>}
