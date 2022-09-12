@@ -13,17 +13,19 @@ const authSlice = createSlice({
   },
   extraReducers: {
     [login.pending]: (state) => {
+      state.token = null
+      state.error = null
       state.loading = true
     },
     [login.fulfilled]: (state, { payload }) => {
-      state.loading = false
-      state.token = payload.token
+      state.token = payload
       state.error = null
+      state.loading = false
     },
     [login.rejected]: (state, { payload }) => {
-      state.loading = false
-      state.error = payload.message
       state.token = null
+      state.error = payload
+      state.loading = false
     }
   }
 })
