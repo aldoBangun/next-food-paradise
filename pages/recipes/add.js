@@ -1,9 +1,14 @@
 import Layout from '../../components/layout/Layout'
+import FormAddRecipe from '@/components/recipe/FormAddRecipe'
+import { Container } from 'react-bootstrap'
 
 const RecipeAdd = () => {
   return (
     <>
-      <h1>Add Recipe</h1>
+      <Container>
+        <h2 className="text-primary text-center py-3">Add Your Recipe</h2>
+        <FormAddRecipe />
+      </Container>
     </>
   )
 }
