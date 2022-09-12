@@ -13,9 +13,7 @@ const RecipeDetails = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (recipeId) {
-      dispatch(getRecipeDetail(recipeId))
-    }
+    if (recipeId) dispatch(getRecipeDetail(recipeId))
   }, [dispatch, recipeId])
 
   return (
