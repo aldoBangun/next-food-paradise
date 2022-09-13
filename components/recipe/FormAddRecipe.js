@@ -1,15 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Form, Button, InputGroup } from 'react-bootstrap'
-import { Book, Image as ImageIcon, Tags, Cup, Building } from 'react-bootstrap-icons'
+import { Book, Image as ImageIcon, Tags, Cup, Building, CodeSlash } from 'react-bootstrap-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import style from '@/styles/FormRecipe.module.css'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import InputError from '../UI/InputError'
+import { createRecipe, resetCreated } from 'features/slices/recipes'
 
 const FormAddRecipe = () => {
-  const currentUser = useSelector(state => state.currentUser)
-  const { user } = currentUser
+  const dispatch = useDispatch()
+  const currentUserState = useSelector(state => state.currentUser)
+  const { user } = currentUserState
+  const recipesState = useSelector(state => state.recipes)
+  const { loading, created: isCreatedRecipe } = recipesState
   const [imageFile, setImageFile] = useState('')
   const [imageError, setImageError] = useState('')
 
@@ -43,9 +47,7 @@ const FormAddRecipe = () => {
         ingredients: normalizedIngredients
       }
 
-      if (!imageFile) delete data.photo
-
-      console.log(data)
+      dispatch(createRecipe(data))
     }
   })
 
@@ -75,6 +77,17 @@ const FormAddRecipe = () => {
 
     setImageFile(file)
   }
+
+  useEffect(() => {
+    if (isCreatedRecipe) {
+      const TIME_OUT = 2000
+      formik.resetForm()
+
+      setTimeout(()=>{
+        dispatch(resetCreated())
+      }, TIME_OUT)
+    }
+  }, [isCreatedRecipe, dispatch, formik])
 
   return (
     <Form onSubmit={formik.handleSubmit}>
@@ -190,7 +203,11 @@ const FormAddRecipe = () => {
       </Form.Group>
 
       <div className="d-grid w-50 mx-auto">
-        <Button className="text-white" type="submit"> POST </Button>
+        <Button className="text-white text-uppercase" type="submit" disabled={loading}>
+          {(loading && !isCreatedRecipe) && 'POSTING'}
+          {(!loading && isCreatedRecipe) && 'CREATED'}
+          {(!loading && !isCreatedRecipe) && 'POST'}
+        </Button>
       </div>
     </Form>
   )
