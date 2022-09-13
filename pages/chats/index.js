@@ -1,11 +1,14 @@
-import Layout from '../../components/layout/Layout'
+import Layout from '@/components/layout/Layout'
+import withRouteGuard from 'hoc/withRouteGuard'
 
 const Chats = () => {
   return <h1>Chats</h1>
 }
 
-Chats.getLayout = function getLayout(page) {
+const ChatsWithRouteGuard = withRouteGuard(Chats)
+
+ChatsWithRouteGuard.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>
 }
 
-export default Chats
+export default ChatsWithRouteGuard

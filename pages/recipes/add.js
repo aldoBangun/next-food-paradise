@@ -1,6 +1,7 @@
 import Layout from '../../components/layout/Layout'
 import FormAddRecipe from '@/components/recipe/FormAddRecipe'
 import { Container } from 'react-bootstrap'
+import withRouteGuard from 'hoc/withRouteGuard'
 
 const RecipeAdd = () => {
   return (
@@ -13,8 +14,10 @@ const RecipeAdd = () => {
   )
 }
 
-RecipeAdd.getLayout = function getLayout(page) {
+const RecipeAddWithRouteGuard = withRouteGuard(RecipeAdd)
+
+RecipeAddWithRouteGuard.getLayout = function getLayout(page) {
   return <Layout> {page} </Layout>
 }
 
-export default RecipeAdd
+export default RecipeAddWithRouteGuard

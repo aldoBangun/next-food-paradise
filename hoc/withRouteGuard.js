@@ -1,8 +1,11 @@
+import { useSelector } from 'react-redux'
+import NoAuth from '@/components/auth/NoAuth'
+
 const withRouteGuard = (Component) => {
   const Wrapper = (props) => {
-    return <Component {...props} />
+    const token = useSelector((state) => state.auth.token)
+    return <> {token ? <Component {...props} /> : <NoAuth />} </>
   }
-
   return Wrapper
 }
 

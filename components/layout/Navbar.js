@@ -18,7 +18,7 @@ const Navbar = () => {
           <NavLink label="Chats" link="/chats">
             <Chat size={24}/>
           </NavLink>
-          <NavLink label="Profile" link="/profile/plase-make-this-dinamic-later">
+          <NavLink label="Profile" link="/profile">
             <Person size={24}/>
           </NavLink>
         </Nav>

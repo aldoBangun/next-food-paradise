@@ -7,7 +7,7 @@ import Loader from '../UI/Loader'
 
 
 const RecipesAll = () => {
-  const limit = 2
+  const limit = 5
   const [page, setPage] = useState(1)
   const dispatch = useDispatch()
   const recipes = useSelector(recipesSelector.selectAll)

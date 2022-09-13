@@ -4,14 +4,19 @@ import { Book, Image as ImageIcon, Tags, Cup, Building } from 'react-bootstrap-i
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import style from '@/styles/FormRecipe.module.css'
+import { useSelector } from 'react-redux'
+import InputError from '../UI/InputError'
 
 const FormAddRecipe = () => {
+  const currentUser = useSelector(state => state.currentUser)
+  const { user } = currentUser
+  const [imageFile, setImageFile] = useState('')
+  const [imageError, setImageError] = useState('')
+
   const RecipeSchema = Yup.object().shape({
-    title: Yup.string()
-      .required('title is required'),
-    ingredients: Yup.string()
-      .required('Ingredients required'),
-    photo: Yup.string(),
+    title: Yup.string().required('title is required'),
+    ingredients: Yup.string().required('Ingredients required'),
+    photo: Yup.string().required('Recipe image required'),
     category: Yup.string(),
     variant: Yup.string(),
     restaurant: Yup.string()
@@ -28,38 +33,83 @@ const FormAddRecipe = () => {
     },
     validationSchema: RecipeSchema,
     onSubmit: (values) => {
-      console.log(values)
+      const ingredients = values.ingredients.split(',')
+      const normalizedIngredients = ingredients.map(item => item.trim())
+
+      const data = {
+        user_id: user.user_id,
+        ...values,
+        photo: imageFile,
+        ingredients: normalizedIngredients
+      }
+
+      if (!imageFile) delete data.photo
+
+      console.log(data)
     }
   })
 
+  const handleImageUpload = (e) => {
+    const ONE_MEGA_BYTE = 1024 * 1024
+    const file = e.target.files[0]
+    const fieldValue = e.target.value || ''
+    const allowedFileType = ['image/jpeg', 'image/jpg', 'image/png']
+    
+    formik.setFieldValue('photo', fieldValue)
+    setImageError('')
+
+    if (!file) {
+      setImageFile('')
+      return
+    }
+
+    const isValidType = allowedFileType.indexOf(file?.type) !== -1
+    const isValidSize = file?.size <= ONE_MEGA_BYTE
+
+    if (!isValidType || !isValidSize) {
+      setImageFile('')
+
+      if (!isValidType) return setImageError('Only accept *.jpeg, *.jpg, and *.png image format')
+      if (!isValidSize) return setImageError('File too large. Image file cannot be more than 1 Mb')
+    }
+
+    setImageFile(file)
+  }
+
   return (
     <Form onSubmit={formik.handleSubmit}>
-      <Form.Group className={style.formGroup} controlId="title">
-        <InputGroup>
-          <InputGroup.Text className={style.formIcon}>
-            <Book />
-          </InputGroup.Text>
-          <Form.Control
-            type="text"
-            className={style.formControl} 
-            placeholder="title"
-            name="title"
-            onChange={formik.handleChange}
-            value={formik.values.title}
-          />
-        </InputGroup>
-      </Form.Group>
+      <div className="mb-4">
+        <Form.Group className={`${style.formGroup} mb-1`} controlId="title">
+          <InputGroup>
+            <InputGroup.Text className={style.formIcon}>
+              <Book />
+            </InputGroup.Text>
+            <Form.Control
+              type="text"
+              className={style.formControl} 
+              placeholder="title"
+              name="title"
+              onChange={formik.handleChange}
+              value={formik.values.title}
+            />
+          </InputGroup>
+        </Form.Group>
+        {formik.errors.title && formik.touched.title && <InputError message={formik.errors.title} />}
+      </div>
 
-      <Form.Group className={style.formGroup} controlId="ingredients">
-        <Form.Control
-          as="textarea" 
-          className={`${style.formControl} ${style.formTextarea}`}
-          placeholder="Ingredients"
-          name="ingredients"
-          onChange={formik.handleChange}
-          value={formik.values.ingredients}
-        />
-      </Form.Group>
+      <div className="mb-4">
+        <Form.Group className={`${style.formGroup} mb-1`} controlId="ingredients">
+          <Form.Control
+            as="textarea" 
+            className={`${style.formControl} ${style.formTextarea}`}
+            placeholder="Ingredients"
+            name="ingredients"
+            onChange={formik.handleChange}
+            value={formik.values.ingredients}
+          />
+        </Form.Group>
+        {formik.errors.ingredients && formik.touched.ingredients && <InputError message={formik.errors.ingredients} />}
+      </div>
 
       <div className="position-relative">
         <Form.Group className={style.formFile} controlId="photo">
@@ -68,7 +118,7 @@ const FormAddRecipe = () => {
             className="d-none"
             type="file"
             name="photo"
-            onChange={formik.handleChange}
+            onChange={handleImageUpload}
             value={formik.values.photo}
           />
         </Form.Group>
@@ -82,10 +132,12 @@ const FormAddRecipe = () => {
               type="text" 
               className={style.formControl}
               placeholder="Click to add recipe image"
-              defaultValue={formik.values.photo}
+              defaultValue={formik.values.photo ? '1 File selected' : ''}
               disabled
             />
           </InputGroup>
+          {imageError && <InputError message={imageError} />}
+          {formik.errors.photo && formik.touched.photo && <InputError message={formik.errors.photo} />}
         </Form.Group>
       </div>
 
@@ -137,8 +189,8 @@ const FormAddRecipe = () => {
         </InputGroup>
       </Form.Group>
 
-      <div className="d-flex justify-content-center">
-        <Button className="text-white"> POST </Button>
+      <div className="d-grid w-50 mx-auto">
+        <Button className="text-white" type="submit"> POST </Button>
       </div>
     </Form>
   )
