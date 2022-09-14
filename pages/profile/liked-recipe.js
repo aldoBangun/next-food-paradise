@@ -1,6 +1,7 @@
 import Layout from '@/components/layout/Layout'
 import { Container } from 'react-bootstrap'
 import RecipeUserList from '@/components/profile/RecipeUserList'
+import withRouteGuard from 'hoc/withRouteGuard'
 
 const LikedRecipe = () => {
   const recipes = [
