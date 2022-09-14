@@ -1,45 +1,36 @@
-import { PersistGate } from 'redux-persist/integration/react'
-import { store, persistor } from '../app/store'
-import { Provider } from 'react-redux'
 import '../styles/globals.css'
 import '../styles/scss/globals.scss'
+import withRedux from 'hoc/withRedux'
+import withAuth from 'hoc/withAuth'
 import axios from 'axios'
+import { store } from 'app/store'
 
+const select = state => state.auth.token
+const listener = () => {
+  const token = select(store.getState())
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+}
+
+store.subscribe(listener)
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL
 
 axios.interceptors.request.use((config) => {
-  if(typeof window !== 'undefined') {
-    const storage = localStorage.getItem('persist:root')
-  
-    if(storage) {
-      const storageJSON = JSON.parse(storage)
-      const auth = storageJSON?.auth
-      const authJSON = JSON.parse(auth)
-      const token = authJSON?.token
-
-      if(config?.category !== "noAuth" && token) {
-        config.headers = {
-          Authorization : `Bearer ${token}`
-        }
-      }
-    }
-  }
-
   return config
 }, (error) => {
   Promise.reject(error)
 })
 
-function MyApp({ Component, pageProps }) {
-  const getLayout = Component.getLayout || ((page) => page)
+axios.interceptors.response.use((config) => {
+  return config
+}, (error) => {
+  Promise.reject(error)
+})
 
-  return (
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      {getLayout(<Component {...pageProps} />)}
-    </PersistGate>
-  </Provider>
-  )
+const MyApp = ({ Component, pageProps }) => {
+  const getLayout = Component.getLayout || ((page) => page)
+  return getLayout(<Component {...pageProps} />)
 }
 
-export default MyApp
+const MyAppWithAuth = withAuth(MyApp)
+const MyAppWithRedux = withRedux(MyAppWithAuth)
+export default MyAppWithRedux

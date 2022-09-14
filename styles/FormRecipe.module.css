@@ -1,0 +1,57 @@
+.formGroup {
+  --padding-x: 1.25rem;
+  --padding-y: .85rem;
+  --round: 0.375rem;
+  margin-bottom: 1.5rem;
+}
+
+.formGroup:has(.formControl:focus) {
+  border-radius: var(--round);
+  box-shadow: 0 0 0 2px var(--bs-primary);
+}
+
+.formIcon,
+.formControl {
+  padding-top: var(--padding-y);
+  padding-bottom: var(--padding-y);
+  border: none;
+  background-color: var(--bs-white);
+}
+
+.formControl:disabled {
+  background-color: var(--bs-white);
+}
+
+.formIcon {
+  border-right: none;
+  padding-left: var(--padding-x);
+  color: var(--bs-gray);
+}
+
+.formControl {
+  border-left: none;
+  padding-right: var(--padding-x);
+  resize: none;
+}
+
+.formTextarea {
+  padding-left: var(--padding-x);
+}
+
+.formFile,
+.fileLabel {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.fileLabel {
+  cursor: text;
+  /* visibility: hidden; */
+}
+
+.formControl:is(:focus) {
+  background-color: var(--bs-white);
+  border-color: #ced4da;
+  box-shadow: none;
+}

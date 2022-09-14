@@ -19,6 +19,18 @@ export const getAllRecipes = createAsyncThunk('recipes/getAllRecipes', async (co
   }
 })
 
+export const createRecipe = createAsyncThunk('recipes/creteRecipe', async (recipe, { rejectWithValue }) => {
+  try {
+    await axios.post(`/recipes`, recipe, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+  } catch (err) {
+    return rejectWithValue(err?.response?.data?.message || 'Something went wrong')
+  }
+})
+
 const recipesAdapter = createEntityAdapter({
   selectId: (recipe) => recipe.recipe_id
 })
@@ -29,12 +41,18 @@ const initialState = {
   totalRecipes: 0,
   dataLength: 0,
   currentPage: 0,
-  totalPages: 0
+  totalPages: 0,
+  created: false
 }
 
 const recipesSlice = createSlice({
   name: 'recipes',
   initialState: recipesAdapter.getInitialState(initialState),
+  reducers: {
+    resetCreated: (state) => {
+      state.created = false
+    }
+  },
   extraReducers: {
     [getAllRecipes.pending]: (state) => {
       state.loading = true
@@ -52,9 +70,25 @@ const recipesSlice = createSlice({
     [getAllRecipes.rejected]: (state, { payload }) => {
       state.loading = false
       state.error = payload
+    },
+    [createRecipe.pending]: (state) => {
+      state.loading = true
+      state.error = null
+      state.created = false
+    },
+    [createRecipe.fulfilled]: (state) => {
+      state.loading = false
+      state.error = null
+      state.created = true
+    },
+    [createRecipe.rejected]: (state, { payload }) => {
+      state.loading = false
+      state.error = payload
+      state.created = false
     }
   }
 })
 
 export const recipesSelector = recipesAdapter.getSelectors(state => state.recipes)
+export const { resetCreated } = recipesSlice.actions
 export default recipesSlice.reducer

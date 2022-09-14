@@ -1,6 +1,7 @@
 import Layout from '@/components/layout/Layout'
 import { Container } from 'react-bootstrap'
 import RecipeUserList from '@/components/profile/RecipeUserList'
+import withRouteGuard from 'hoc/withRouteGuard'
 
 const MyRecipe = () => {
   const recipes = [
@@ -27,8 +28,10 @@ const MyRecipe = () => {
   )
 }
 
-MyRecipe.getLayout = function getLayout(page) {
+const MyRecipeWithRouteGuard = withRouteGuard(MyRecipe)
+
+MyRecipeWithRouteGuard.getLayout = function getLayout(page) {
   return <Layout header="My Recipe">{page}</Layout>
 }
 
-export default MyRecipe
+export default MyRecipeWithRouteGuard

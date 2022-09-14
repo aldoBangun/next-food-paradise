@@ -4,10 +4,11 @@ import RecipeSliderItem from './RecipeSliderItem'
 import { Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPopularRecipe } from 'features/thunks/popularRecipe'
+import Loader from '../UI/Loader'
 
 const RecipeSlider = () => {
   const popularRecipe = useSelector(state => state.popularRecipe)
-  const recipes = popularRecipe?.recipes
+  const { recipes, loading } = popularRecipe
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const RecipeSlider = () => {
             <RecipeSliderItem key={recipe.recipe_id} {...recipe} />
           ))}
         </div>
+        {loading && <Loader />}
       </div>
     </>
   )

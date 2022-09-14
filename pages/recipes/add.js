@@ -1,15 +1,23 @@
 import Layout from '../../components/layout/Layout'
+import FormAddRecipe from '@/components/recipe/FormAddRecipe'
+import { Container } from 'react-bootstrap'
+import withRouteGuard from 'hoc/withRouteGuard'
 
 const RecipeAdd = () => {
   return (
     <>
-      <h1>Add Recipe</h1>
+      <Container>
+        <h2 className="text-primary text-center py-3">Add Your Recipe</h2>
+        <FormAddRecipe />
+      </Container>
     </>
   )
 }
 
-RecipeAdd.getLayout = function getLayout(page) {
+const RecipeAddWithRouteGuard = withRouteGuard(RecipeAdd)
+
+RecipeAddWithRouteGuard.getLayout = function getLayout(page) {
   return <Layout> {page} </Layout>
 }
 
-export default RecipeAdd
+export default RecipeAddWithRouteGuard

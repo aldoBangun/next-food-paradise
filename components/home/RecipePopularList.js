@@ -4,10 +4,11 @@ import style from '@/styles/Home.module.css'
 import RecipePopularItem from './RecipePopularItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPopularRecipe } from 'features/thunks/popularRecipe'
+import Loader from '../UI/Loader'
 
 const RecipePopularList = () => {
   const popularRecipe = useSelector(state => state.popularRecipe)
-  const recipes = popularRecipe?.recipes
+  const { recipes, loading } = popularRecipe
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -29,6 +30,7 @@ const RecipePopularList = () => {
           <RecipePopularItem key={recipe.recipe_id} {...recipe} />
         ))}
       </ul>
+      {loading && <Loader />}
     </>
   )
 }

@@ -13,7 +13,7 @@ import {
 import rootReducer from './reducer'
 
 const persistConfig = {
-  key: 'root',
+  key: 'food-paradise',
   storage,
   whitelist: ['auth']
 }
@@ -28,6 +28,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+  devTools: process.env.NEXT_NODE_ENV !== 'production'
 })
 
 export const persistor = persistStore(store)
