@@ -1,21 +1,8 @@
-import { useEffect } from 'react'
 import DetailHero from '@/components/recipe/detail/DetailHero'
 import DetailTabs from '@/components/recipe/detail/DetailTabs'
-import { useRouter } from 'next/router'
-import { useSelector, useDispatch } from 'react-redux'
-import { getRecipeDetail } from 'features/thunks/recipeDetail'
+import axios from 'axios'
 
-const RecipeDetails = () => {
-  const router = useRouter()
-  const { recipeId } = router.query
-  const recipeDetail = useSelector((state) => state.recipeDetail)
-  const { recipe } = recipeDetail
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (recipeId) dispatch(getRecipeDetail(recipeId))
-  }, [dispatch, recipeId])
-
+const RecipeDetails = ({ recipe }) => {
   return (
     <>
       {recipe && (
@@ -26,6 +13,36 @@ const RecipeDetails = () => {
       )}
     </>
   )
+}
+
+export async function getStaticPaths() {
+  const response = await axios.get(`/recipes`)
+  const recipes = response?.data?.data
+
+  return {
+    paths: recipes.map(recipe => ({
+      params: { recipeId: recipe?.recipe_id?.toString() }
+    })),
+    fallback: false,
+  }
+}
+
+export async function getStaticProps(context) {
+  const { recipeId } = context.params
+  const responseRecipe = await axios.get(`/recipes/${recipeId}`)
+  const recipe = responseRecipe?.data?.data
+  const responseUser = await axios.get(`/users/${recipe.user_id}`)
+  const user = responseUser?.data?.data
+
+  return {
+    props: {
+      recipe: {
+        ...recipe,
+        ...user
+      }
+    },
+    revalidate: 30
+  }
 }
 
 export default RecipeDetails

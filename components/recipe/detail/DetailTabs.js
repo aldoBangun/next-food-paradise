@@ -5,17 +5,7 @@ import TabVideos from './TabVideos'
 import CommentForm from '../comments/CommentForm'
 import CommentList from '../comments/CommentList'
 
-const DetailTabs = ({ ingredients, recipe_id: recipeId }) => {
-  const videos = [
-    {
-      videoId: 1,
-      title: "Preparation",
-    },
-    {
-      videoId: 2,
-      title: "Boiling Water"
-    }
-  ]
+const DetailTabs = ({ ingredients, recipe_id: recipeId, videos }) => {
 
   return (
     <div className={style.detailTabs}>
@@ -30,8 +20,8 @@ const DetailTabs = ({ ingredients, recipe_id: recipeId }) => {
         </Tabs>
       </Container>
       <Container className="pt-5">
-        <CommentForm />
-        <CommentList />
+        <CommentForm recipeId={recipeId} />
+        <CommentList recipeId={recipeId} />
       </Container>
     </div>
   )

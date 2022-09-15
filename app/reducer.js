@@ -5,6 +5,7 @@ import popularRecipe from 'features/slices/popularRecipe'
 import recipeDetail from 'features/slices/recipeDetail'
 import search from 'features/slices/search'
 import currentUser from 'features/slices/currentUser'
+import comments from 'features/slices/comments'
 
 const reducer = {
   auth,
@@ -12,7 +13,8 @@ const reducer = {
   recipeDetail,
   recipes,
   search,
-  currentUser
+  currentUser,
+  comments
 }
 
 export default combineReducers(reducer)
