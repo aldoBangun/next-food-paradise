@@ -25,3 +25,7 @@ ol {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.object-cover {
+  object-fit: cover;
+}

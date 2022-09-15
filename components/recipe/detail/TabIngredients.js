@@ -5,7 +5,7 @@ const TabIngredients = ({ ingredients = [] }) => {
         {ingredients && ingredients.map((item, index) => (
           <li key={index}>- {item}</li>
         ))}
-        {!ingredients?.length && (<p>There is no ingredients to success!</p>)}
+        {!ingredients?.length && (<p>No Ingredients.</p>)}
       </ul>
     </>
   )

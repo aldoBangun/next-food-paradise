@@ -12,7 +12,7 @@ const CommentItem = (props) => {
           alt={name}
           width={48}
           height={48}
-          className="rounded-circle"
+          className="rounded-circle object-cover"
         />
         <div>
           <h6 className={style.commentName}>{name}</h6>
