@@ -44,7 +44,7 @@ const FormAddRecipe = () => {
         user_id: user.user_id,
         ...values,
         photo: imageFile,
-        ingredients: normalizedIngredients
+        ingredients: JSON.stringify(normalizedIngredients)
       }
 
       dispatch(createRecipe(data))

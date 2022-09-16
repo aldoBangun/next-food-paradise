@@ -9,7 +9,6 @@ const NoAuth = () => {
   const router = useRouter()
   const { pathname } = router
   const encryptedPath = CryptoJS.AES.encrypt(pathname, process.env.NEXT_PUBLIC_CRYPTO_SECRET_KEY)
-  console.log(process.env.NEXT_PUBLIC_CRYPTO_SECRET_KEY)
 
   return (
     <div className={`${style.pageHeight} d-flex align-items-center justify-content-center`}>
