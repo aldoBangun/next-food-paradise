@@ -19,7 +19,7 @@ const RecipeCategoryList = () => {
           </RecipeCategoryItem>
         </li>
         <li>
-          <RecipeCategoryItem link="sea-food" label="Seafood">
+          <RecipeCategoryItem link="seafood" label="Seafood">
             <SeaFood size={80} />
           </RecipeCategoryItem>
         </li>
