@@ -1,8 +1,9 @@
 import Layout from '@/components/layout/Layout'
 import withRouteGuard from 'hoc/withRouteGuard'
+import MaintenancePage from 'pages/MaintenancePage'
 
 const Chats = () => {
-  return <h1>Chats</h1>
+  return <MaintenancePage />
 }
 
 const ChatsWithRouteGuard = withRouteGuard(Chats)
