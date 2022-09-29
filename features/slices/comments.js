@@ -18,7 +18,8 @@ export const createComment = createAsyncThunk('comments/createComment', async (d
   }
 
   try {
-    await axios.post(`/recipes/${recipeId}/comments`, newComment)
+    const response = await axios.post(`/recipes/${recipeId}/comments`, newComment)
+    return response?.data?.comment
   } catch (err) {
     return rejectWithValue(err?.response?.data?.message || 'Something went wrong')
   }
@@ -50,8 +51,10 @@ const commentsSlice = createSlice({
     [createComment.pending]: (state) => {
       state.loading = true
     },
-    [createComment.fulfilled]: (state) => {
+    [createComment.fulfilled]: (state, { payload }) => {
       state.loading = false
+      state.error = null
+      state.comments.push(payload)
     },
     [createComment.rejected]: (state, { payload }) => {
       state.error = false
