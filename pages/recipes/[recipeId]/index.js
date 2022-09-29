@@ -23,7 +23,7 @@ export async function getStaticPaths() {
     paths: recipes.map(recipe => ({
       params: { recipeId: recipe?.recipe_id?.toString() }
     })),
-    fallback: false,
+    fallback: 'blocking',
   }
 }
 
